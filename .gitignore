@@ -1,5 +1,10 @@
 /**/*/__pycache__/*
-. ennv
-. env 
-. static
-. db.sqlite3
+ennv
+env  
+static
+db.sqlite3
+app/**/*/__pycache__/*
+authetntication/**/*/__pycache__/*
+venv/
+__pycache__/
+__pycache__

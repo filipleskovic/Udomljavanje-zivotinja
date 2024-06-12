@@ -1,0 +1,60 @@
+
+{% extends 'app/base.html' %} {% block content %}
+<table class="table table-hover table-success caption-top">
+	<caption style = "color:green">APPROVED</caption>
+	<thead>
+    <tr>
+      <th scope="col">Id zahtjeva</th>
+	  <th scope="col">Id životinje</th>
+      <th scope="col">Ime životinje</th>
+      <th scope="col">Pasmina</th>
+      <th scope="col">Oib</th>
+	  <th scope="col">Ime</th>
+	  <th scope="col">Prezime</th>
+    </tr>
+  </thead>
+  <tbody>
+	{% for request in approved %}
+    <tr>
+      <th scope="row">{{ request.id }}</th>
+	  <td>{{ request.animal_id.id }}</td>
+      <td>{{ request.animal_id.name }}</td>
+      <td>{{ request.animal_id.type.breed }}</td>
+      <td>{{ request.user_id.oib }}</td>
+	  <td>{{ request.user_id.first_name }}</td>
+	  <td>{{ request.user_id.last_name }}</td>
+    </tr>
+	{% endfor %}
+  </tbody>
+</table>
+
+<table class="table table-hover table-danger caption-top">
+	<caption style="color:red">DECLINED</caption>
+	  <thead>
+    <tr>
+      <th scope="col">Id zahtjeva</th>
+	  <th scope="col">Id životinje</th>
+      <th scope="col">Ime životinje</th>
+      <th scope="col">Pasmina</th>
+      <th scope="col">Oib</th>
+	  <th scope="col">Ime</th>
+	  <th scope="col">Prezime</th>
+    </tr>
+  </thead>
+  <tbody>
+	{% for request in declined %}
+    <tr>
+      <th scope="row">{{ request.id }}</th>
+	  <td>{{ request.animal_id.id }}</td>
+      <td>{{ request.animal_id.name }}</td>
+      <td>{{ request.animal_id.type.breed }}</td>
+      <td>{{ request.user_id.oib }}</td>
+	  <td>{{ request.user_id.first_name }}</td>
+	  <td>{{ request.user_id.last_name }}</td>
+    </tr>
+	{% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}

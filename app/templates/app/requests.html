@@ -1,0 +1,36 @@
+{% extends 'app/base.html' %} {% block content %}
+<div class="content container-md mb-3" style="margin-top: 15px;">
+<div class="row row-cols-auto justify-content-center">
+{% for request in pending %}
+<div class="card" style="width: 18rem; margin:0px 10px 10px;" >
+  <img src="{{ request.user_id.avatar_url }}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{ request.user_id.first_name }} {{ request.user_id.last_name }}</h5>
+    <p class="card-text" style="max-height: 100px;overflow-y: auto;">{{ request.description }}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+	<li class="list-group-item">{{ request.user_id.oib }}</li>
+    <li class="list-group-item">{{ request.user_id.first_name }}</li>
+    <li class="list-group-item">{{ request.user_id.last_name }}</li>
+    <li class="list-group-item">{{ request.user_id.address }}</li>
+	<li class="list-group-item">{{ request.user_id.city }}</li>
+  </ul>
+  <div class="card-body" style="display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 5px;">
+      <form action="{% url 'app:request_decision' request.id %}" method="post"> 
+        <div class="d-flex justify-content-start" style="gap:5px;">
+        <input type="submit" class="btn btn-success" value="APPROVE" name="decision">
+        <input type="submit" class="btn btn-danger" value="DECLINE" name="decision">  
+        {% csrf_token %}
+        </div>
+      </form>
+	    <a href="{% url 'app:animalDetails' request.animal_id.id %}" class="btn btn-info card-link">DETAILS</a>
+  </div>
+</div>
+{% endfor %}
+</div>
+</div>
+
+{% endblock %}

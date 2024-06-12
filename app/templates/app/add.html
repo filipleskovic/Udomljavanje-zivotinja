@@ -1,0 +1,21 @@
+{% extends 'app/base.html' %} {% block extrahead %} {{ form.media }}
+{% endblock extrahead %} {% block content %}
+<div class="row">
+  <div class="col-md-12 my-4">
+  </div>
+</div>
+<form method="post" accept-charset="utf-8">
+  {% csrf_token %}
+
+  <div class="row">
+    <div class="col-md-8 mx-auto my-4">
+      {% include 'includes/bs_form.html' with form=form %}
+      <div class="content container-md mb-2" style="margin-top: 10px;">
+        <div class="row row-cols-4">
+        </div>
+      </div>
+      <input type="submit" value="Submit" class="btn btn-primary my-3 mx-auto d-block col-md-2" />
+    </div>
+  </div>
+</form>
+{% endblock %}

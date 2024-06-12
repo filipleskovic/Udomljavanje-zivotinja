@@ -1,5 +1,0 @@
-/**/*/__pycache__/*
-ennv
-env 
-static
-db.sqlite3
