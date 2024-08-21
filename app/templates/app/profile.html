@@ -1,0 +1,82 @@
+{% extends 'app/base.html' %} {% block content %}
+<div class="profileDiv" style="margin: 20px">
+  <div class="row">
+    <div class="col-sm-8">
+      <img
+        id="profileImage"
+        src=" {{ user.avatar_url }} "
+        style="width: 300px; height: 250px border"
+        alt=""
+      />
+    </div>
+    <div class="col-sm-4 overflow-auto">
+      <p>FirstName: {{ user.first_name }}</p>
+      <p>LastName: {{ user.last_name }}</p>
+      <p>Email: {{ user.email }}</p>
+      <p>OIB: {{ user.oib }}</p>
+      <p>Address: {{ user.address }}</p>
+    </div>
+    
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <caption>
+        Adopted Animals
+      </caption>
+      <table class="table table-hover caption-top">
+        <thead>
+            <th scope="col">Id životinje</th>
+            <th scope="col">Ime životinje</th>
+            <th scope="col">Pasmina</th>
+          </tr>
+        </thead>
+         <tbody>
+        {% for animal in adopted_animals %}
+        <tr data-href="{% url 'app:animalDetails' animal.id %}" style="cursor: pointer;">
+          <th scope="row">{{ animal.id }}</th>
+          <td>{{ animal.name }}</td>
+          <td>{{ animal.type.breed }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      </table>
+    </div>
+    <div class="col-sm"></div>
+    <div class="col-sm">
+      <table class="table table-hover caption-top">
+        <caption>
+          Requests
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Breed</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for request in requests %}
+          <tr data-href="{% url 'app:animalDetails' request.animal_id.id %}" class="{% if request.status == 'APPROVED' %}table-success{% elif request.status == 'PENDING' %}table-warning{% elif request.status == 'DECLINED' %}table-danger{% endif %}" style="cursor: pointer;">
+            <th scope="row">{{ request.id  }}</th>
+            <td>{{ request.animal_id.name }}</td>
+            <td>{{ request.animal_id.type.breed }}</td>
+            <td>{{ request.status }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const rows = document.querySelectorAll("tr[data-href]");
+        rows.forEach((row) => {
+          row.addEventListener("click", function () {
+            window.location.href = row.getAttribute("data-href");
+          });
+        });
+      });
+    </script>
+{% endblock %}

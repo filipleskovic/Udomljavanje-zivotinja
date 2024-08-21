@@ -33,7 +33,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     city = models.CharField(max_length=64, null=False, blank=False)
     date_of_birth = models.DateField(null=True, blank=True)
     gender = models.CharField(max_length=12, null=True, blank=True)
-    avatar_url = models.CharField(max_length=128, default="https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg")
+    avatar_url = models.CharField(max_length=128, 
+                                  default="https://www.shutterstock.com/image-vector/default-avatar-profile-icon-social-600nw-1677509740.jpg")
 
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -45,7 +46,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
-    
     
 class AnimalType(models.Model):
     CAT = "CAT"
@@ -60,8 +60,6 @@ class AnimalType(models.Model):
     breed=models.CharField(max_length=64)
     def __str__(self) -> str:
         return f"{self.breed}"
-
-    
 
 class Animal(models.Model):
     name = models.CharField(max_length=128)

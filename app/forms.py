@@ -8,8 +8,8 @@ from bootstrap_datepicker_plus.widgets import DatePickerInput, DateTimePickerInp
 class CustomUserForm(UserCreationForm):
     date_of_birth = forms.DateField(widget=DatePickerInput())
     GENDER_CHOICES = [
-        ('muško', 'Muško'),
-        ('žensko', 'Žensko'),
+        ('male', 'Male'),
+        ('female', 'Female'),
     ]
     gender = forms.ChoiceField(choices=GENDER_CHOICES, required=True)
     avatar_url = forms.CharField(max_length=128, required=True)

@@ -1,26 +1,34 @@
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponseRedirect
-from app.models import Animal,AnimalType,AdoptingRequest
+from app.models import Animal,AnimalType,AdoptingRequest,User
 from django.urls import reverse
 from app.forms import AnimalForm,AnimalTypeForm
 
 def base(request):
     user = request.user
     context = {
-        "user": user,
+        "user":user,
     }
     return render(request, "app/base.html", context)
 
 def	index (request):
     user=request.user
+    adopted_cats = Animal.objects.filter(type__type=AnimalType.CAT,is_adopted=True)
+    adopted_dogs= Animal.objects.filter(type__type=AnimalType.DOG,is_adopted=True)
+    not_adopted_cats = Animal.objects.filter(type__type=AnimalType.CAT,is_adopted=False)
+    not_adopted_dogs= Animal.objects.filter(type__type=AnimalType.DOG,is_adopted=False)
     context={
-        "user":user
+        "user":user,
+        "adopted_dogs": adopted_dogs,
+        "adopted_cats":adopted_cats,
+        "not_adopted_dogs": not_adopted_dogs,
+        "not_adopted_cats":not_adopted_cats
     }
     return render(request, "app/index.html", context)
 def adopt (request):
     user=request.user
-    cats = Animal.objects.filter(type__type=AnimalType.CAT)
-    dogs= Animal.objects.filter(type__type=AnimalType.DOG)
+    cats = Animal.objects.filter(type__type=AnimalType.CAT,is_adopted=False)
+    dogs= Animal.objects.filter(type__type=AnimalType.DOG,is_adopted=False)
     context={
         "user":user,
         "dogs": dogs,
@@ -116,3 +124,41 @@ def addBreed(request):
         "form": form,
     }
     return render(request, "app/add.html", context)
+
+from django.shortcuts import render
+from .models import Animal, AnimalType
+
+def searchBreeds(request):
+    if request.method == 'POST':
+        searchedBreed = request.POST.get("searchBreed")
+        if searchedBreed:
+            animalType = AnimalType.objects.filter(breed__icontains=searchedBreed).first()
+            if animalType:
+                if animalType.type=="DOG":
+                    dogs= Animal.objects.filter(type__breed=animalType.breed)
+                    cats=[]
+                else:
+                    cats=Animal.objects.filter(type__breed=animalType.breed)
+                    dogs=[]
+                context = {
+                    "dogs":dogs,
+                    "cats":cats,
+                    "user": request.user,
+                }
+            else:
+                context={}
+    return render(request, "app/adopt.html", context)
+
+def profile(request,user_id):
+    user=get_object_or_404(User,pk = user_id)
+    requests=AdoptingRequest.objects.filter(user_id=user)
+    other_requests=requests.exclude(status=AdoptingRequest.APPROVED)
+    adopted_requests = requests.filter(status=AdoptingRequest.APPROVED)
+    adopted_animals = [request.animal_id for request in adopted_requests]
+    context = {
+        "user":user,
+        "requests":other_requests,
+        "adopted_animals":adopted_animals
+    }
+    return render(request,"app/profile.html",context)
+

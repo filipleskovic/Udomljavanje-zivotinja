@@ -1,4 +1,70 @@
 {% extends 'app/base.html' %} {% block content %}
-	<h1>Kako ste</h1>
-	<p> Dobro Došao {{ user.first_name }}</p>
-{% endblock %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div style="height: 350px">
+        <img
+          src="https://www.rover.com/blog/wp-content/uploads/cat-family-bond-960x540.jpg"
+          alt=""
+          style="
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+          "
+        />
+      </div>
+    </div>
+    <div class="col">
+      <div style="height: 350px">
+        <h2 style="text-align: center">O Aplikaciji</h2>
+        <p style="color: black; font-size: 20px">
+          Aplikacija je namjenjena za lakše i brže udomljavanje napuštenih
+          životinja. Kako bi udomio životinju, napravi korisnički račun te ako
+          se neka životinja sviđa, pošalji zahjtev. U zahjevu napiši zašto bi
+          volio udomiti životinju, a mi ćemo ti odgovori na zahjtev u najkraćem
+          roku!
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h2>Udomljeno</h2>
+      <div class="row">
+        <div class="col">
+            <h3>Pasa: {{ adopted_dogs.count }}</h3>
+        </div>
+        <div class="col">
+            <h3>Mačaka: {{ adopted_cats.count }}</h3>
+        </div>
+      </div>
+      <h2 style="margin-top: 30px;">Traži dom</h2>
+      <div class="row">
+        <div class="col">
+            <h3>Pasa: {{ not_adopted_dogs.count }}</h3>
+        </div>
+        <div class="col">
+            <h3>Mačaka: {{ not_adopted_cats.count }}</h3>
+        </div>
+      </div>
+      </div>  
+        <div class="col">
+          <div style="height: 350px">
+            <img
+              src="https://cdn.the-scientist.com/assets/articleNo/68110/aImg/40220/dog-evolution-nut-l.jpg"
+              alt=""
+              style="
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 10px;
+              "
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+  </div>
+</div>
