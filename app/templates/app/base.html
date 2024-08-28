@@ -83,7 +83,7 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                AdminAction
+                Kontrola
               </a>
               {% endif %}
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -137,13 +137,13 @@
             class="nav-link login-btn"
             href="{% url 'app:profile' user.id %}"
             style="padding: 0px 10px 0px"
-            >Profile</a
+            >Profil</a
           >
           <a
             class="nav-link login-btn"
             href="{% url 'authentication:logout' %}"
             style="padding: 0px 10px 0px"
-            >Logout</a
+            >Odjava</a
           >
           {% else %}
           <a
@@ -151,13 +151,13 @@
             class="nav-link login-btn"
             href="{% url 'login' %}"
             style="padding: 0px 10px 0px"
-            >Login</a
+            >Prijava</a
           >
           <a
             class="nav-link signup-btn"
             href="{% url 'authentication:signup' %}"
             style="padding: 0px 10px 0px"
-            >Register</a
+            >Registracija</a
           >
           {% endif %}
           <script>

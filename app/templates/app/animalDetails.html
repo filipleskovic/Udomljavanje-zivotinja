@@ -2,10 +2,10 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-8">
-		  <img src="{{ animal.avatar_url }}">
-	  </div>
+      <img src="{{ animal.avatar_url }}" />
+    </div>
     <div class="col-sm-4">
-      <h1 style="text-align: center;">{{animal.name}}</h1>
+      <h1 style="text-align: center">{{animal.name}}</h1>
       <p>{{ animal.description }}</p>
     </div>
   </div>
@@ -17,32 +17,61 @@
     </div>
     <div class="col-sm">
       {% if not user.is_authenticated %}
-      <p>Prijavi se kako mogao poslati zahjtev za udomljavanje!</p>
+      <p>Prijavi se kako mogao poslati zahtjev za udomljavanje!</p>
       {% else %}
-      <p>Kako bi udomio životinju, pošalji zahjev u kojem objašnjavaš zašto si ti idealna osoba za udomit novog prijatelja</p>
+      <p>
+        Kako bi udomio životinju, pošalji zahtjev u kojem objašnjavaš zašto si
+        ti idealna osoba za udomit novog prijatelja
+      </p>
       {% endif %}
     </div>
     <div class="col-sm">
-      {% csrf_token %}
-      {% if not user.is_authenticated %}
+      {% csrf_token %} {% if not user.is_authenticated %}
       <form action="{% url 'app:new_request' animal.id %}" method="post">
-      <input type="text" class="form-control" aria-label="Sizing example input" placeholder="Zahjtev za udomljavanje"
-						aria-describedby="inputGroup-sizing-default" name="text" id="" style="margin-bottom:10px" disabled>
-					<input type="submit" class="btn btn-success" value="Podnesi zahjtev" disabled>
-          </form>
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Sizing example input"
+          placeholder="Zahtjev za udomljavanje"
+          aria-describedby="inputGroup-sizing-default"
+          name="text"
+          id=""
+          style="margin-bottom: 10px"
+          disabled
+        />
+        <input
+          type="submit"
+          class="btn btn-success"
+          value="Podnesi zahjtev"
+          disabled
+        />
+      </form>
+      {% else %} {% if not request %}
+
+      <form action="{% url 'app:new_request' animal.id %}" method="post">
+        <input
+          type="text"
+          class="form-control"
+          aria-label="Sizing example input"
+          placeholder="Zahjtev za udomljavanje"
+          aria-describedby="inputGroup-sizing-default"
+          name="text"
+          id=""
+          style="margin-bottom: 10px"
+        />
+        <input type="submit" class="btn btn-success" value="Podnesi zahjtev" />
+        {% csrf_token %}
+      </form>
+      {% else %} {% if request.status == "APPROVED" %}
+      <p>
+        Čestitamo, udomili ste životinju! Uskoro će te dobiti mail za daljnje
+        upute!
+      </p>
+      {% elif request.status == "DECLINED" %}
+      <p>Status zahtjeva: Odbijen</p>
       {% else %}
-      {% if not request %}
-      
-        <form action="{% url 'app:new_request' animal.id %}" method="post">
-      <input type="text" class="form-control" aria-label="Sizing example input" placeholder="Zahjtev za udomljavanje"
-						aria-describedby="inputGroup-sizing-default" name="text" id="" style="margin-bottom:10px">  
-          <input type="submit" class="btn btn-success" value="Podnesi zahjtev">
-          {% csrf_token %}
-          </form>
-      {% else %}
-          <p>Status zahjteva: {{ request.status }}</p>
-          {% endif %}
-        {% endif %}
+      <p>Status zahtjeva: U procesu</p>
+      {% endif %} {% endif %} {% endif %}
     </div>
   </div>
 </div>

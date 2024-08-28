@@ -1,51 +1,5 @@
 {% extends 'app/base.html' %} {% block content %}
-<div
-  id="carouselExampleFade"
-  class="carousel slide carousel-fade"
-  data-bs-ride="carousel"
->
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img
-        src="https://www.rover.com/blog/wp-content/uploads/2018/02/Stocksy_txp95e3887bJay100_Medium_1351253-960x540.jpg"
-        class="d-block w-100"
-        alt="..."
-      />
-    </div>
-    <div class="carousel-item">
-      <img
-        src="https://scx2.b-cdn.net/gfx/news/2018/emotionalbon.jpg"
-        class="d-block w-100"
-        alt="..."
-      />
-    </div>
-    <div class="carousel-item">
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Huskiesatrest.jpg/1200px-Huskiesatrest.jpg"
-        class="d-block w-100"
-        alt=""
-      />
-    </div>
-  </div>
-  <button
-    class="carousel-control-prev"
-    type="button"
-    data-bs-target="#carouselExampleFade"
-    data-bs-slide="prev"
-  >
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button
-    class="carousel-control-next"
-    type="button"
-    data-bs-target="#carouselExampleFade"
-    data-bs-slide="next"
-  >
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
+
 <div class="content container-md mb-3" style="margin-top: 15px">
   <h2>Psi({{ dogs.count }})</h2>
   <div class="row row-cols-auto justify-content-center">
@@ -66,14 +20,14 @@
             class="card-link"
             style="text-decoration: none"
           >
-            <button type="button" class="btn btn-success">Detalis</button>
+            <button type="button" class="btn btn-success">Detalji</button>
           </a>
         </div>
       </div>
     </div>
     {% endif %} {% endfor %}
   </div>
-  <h2>Mačke({{ cats.count }})</h2>  
+  <h2>Mačke({{ cats.count }})</h2>
   <div class="row row-cols-auto justify-content-center">
     {% for cat in cats %} {% if not cat.is_adopted %}
     <div class="col" style="margin-bottom: 15px">
@@ -88,7 +42,7 @@
         </ul>
         <div class="card-body d-flex justify-content-center">
           <a href="{% url 'app:animalDetails' cat.id %}" class="card-link">
-            <button type="button" class="btn btn-success">Detalis</button>
+            <button type="button" class="btn btn-success">Detalji</button>
           </a>
         </div>
       </div>

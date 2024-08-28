@@ -3,6 +3,8 @@ from django.http import HttpResponseRedirect
 from app.models import Animal,AnimalType,AdoptingRequest,User
 from django.urls import reverse
 from app.forms import AnimalForm,AnimalTypeForm
+from django.shortcuts import render
+from .models import Animal, AnimalType
 
 def base(request):
     user = request.user
@@ -114,9 +116,8 @@ def addBreed(request):
     if request.method == "POST" and request.user.is_authenticated:
         form = AnimalTypeForm(request.POST)
         if form.is_valid():
-            saved_animal = form.save(commit=False)
-            saved_animal.is_adopted=False
-            saved_animal.save()
+            saved_breed = form.save(commit=False)
+            saved_breed.save()
             return HttpResponseRedirect(reverse("app:index"))
     else:
         form = AnimalTypeForm()
@@ -125,8 +126,6 @@ def addBreed(request):
     }
     return render(request, "app/add.html", context)
 
-from django.shortcuts import render
-from .models import Animal, AnimalType
 
 def searchBreeds(request):
     if request.method == 'POST':
@@ -135,10 +134,10 @@ def searchBreeds(request):
             animalType = AnimalType.objects.filter(breed__icontains=searchedBreed).first()
             if animalType:
                 if animalType.type=="DOG":
-                    dogs= Animal.objects.filter(type__breed=animalType.breed)
+                    dogs= Animal.objects.filter(type__breed=animalType.breed,is_adopted=False)
                     cats=[]
                 else:
-                    cats=Animal.objects.filter(type__breed=animalType.breed)
+                    cats=Animal.objects.filter(type__breed=animalType.breed,is_adopted=False)
                     dogs=[]
                 context = {
                     "dogs":dogs,
@@ -147,6 +146,8 @@ def searchBreeds(request):
                 }
             else:
                 context={}
+        else:
+            context={}
     return render(request, "app/adopt.html", context)
 
 def profile(request,user_id):

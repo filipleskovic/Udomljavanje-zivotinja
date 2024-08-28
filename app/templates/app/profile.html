@@ -10,18 +10,20 @@
       />
     </div>
     <div class="col-sm-4 overflow-auto">
-      <p>FirstName: {{ user.first_name }}</p>
-      <p>LastName: {{ user.last_name }}</p>
+      <p>Ime: {{ user.first_name }}</p>
+      <p>Prezime: {{ user.last_name }}</p>
       <p>Email: {{ user.email }}</p>
       <p>OIB: {{ user.oib }}</p>
-      <p>Address: {{ user.address }}</p>
+      <p>Adresa: {{ user.address }}</p>
     </div>
     
   </div>
   <div class="row">
     <div class="col-sm">
       <caption>
-        Adopted Animals
+        <h1>
+          Udomljene životinje
+        </h1>
       </caption>
       <table class="table table-hover caption-top">
         <thead>
@@ -32,7 +34,7 @@
         </thead>
          <tbody>
         {% for animal in adopted_animals %}
-        <tr data-href="{% url 'app:animalDetails' animal.id %}" style="cursor: pointer;">
+        <tr data-href="{% url 'app:animalDetails' animal.id %}" class="table-success"style="cursor: pointer;">
           <th scope="row">{{ animal.id }}</th>
           <td>{{ animal.name }}</td>
           <td>{{ animal.type.breed }}</td>
@@ -45,13 +47,15 @@
     <div class="col-sm">
       <table class="table table-hover caption-top">
         <caption>
-          Requests
+          <h1>
+          Zahtjevi
+        </h1> 
         </caption>
         <thead>
-          <tr>
+          <tr class>
             <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Breed</th>
+            <th scope="col">Ime</th>
+            <th scope="col">Pasmina</th>
             <th scope="col">Status</th>
           </tr>
         </thead>

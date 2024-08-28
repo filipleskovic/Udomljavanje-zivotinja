@@ -1,4 +1,4 @@
-{% extends 'app/base.html' %} {% block content %}
+{% extends 'app/base.html' %} {% block content %} {% if user.is_superuser %}
 <table class="table table-hover table-success caption-top">
   <caption style="color: green">
     APPROVED
@@ -78,5 +78,4 @@
     {% endfor %}
   </tbody>
 </table>
-
-{% endblock %}
+{% endif %} {% endblock %}
