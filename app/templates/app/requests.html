@@ -40,13 +40,13 @@
             <input
               type="submit"
               class="btn btn-success"
-              value="APPROVE"
+              value="ODOBRI"
               name="decision"
             />
             <input
               type="submit"
               class="btn btn-danger"
-              value="DECLINE"
+              value="ODBIJ"
               name="decision"
             />
             {% csrf_token %}
@@ -55,7 +55,7 @@
         <a
           href="{% url 'app:animalDetails' request.animal_id.id %}"
           class="btn btn-info card-link"
-          >DETAILS</a
+          >DETALJI</a
         >
       </div>
     </div>

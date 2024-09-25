@@ -87,7 +87,7 @@ def request_decision(request,req_id):
     animal_id = req.animal_id
     if request.method == "POST" and request.user.is_authenticated:
         inputvalue = request.POST.get("decision", None)
-        if inputvalue == "APPROVE":
+        if inputvalue == "ODOBRI":
             req.status = AdoptingRequest.APPROVED
             animal_id.is_adopted=True
             animal_id.save()

@@ -1,8 +1,7 @@
-{% extends 'app/base.html' %} {% block extrahead %} {{ form.media }} {% endblock
-extrahead %} {% block content %} 
+{% extends 'app/base.html' %} {% block extrahead %} {{ form.media }} {% endblock extrahead %} {% block content %}
 <div class="row">
   <div class="col-md-12 my-4">
-    <h2 class="text-center">Register</h2>
+    <h2 class="text-center">Registracija</h2>
   </div>
 </div>
 <form method="post" accept-charset="utf-8">
@@ -12,9 +11,9 @@ extrahead %} {% block content %}
     <div class="col-md-8 mx-auto my-4">
       {% include 'includes/bs_form.html' with form=form %}
       <div class="d-grid gap-2 col-6 mx-auto">
-        <input type="submit" value="Register" class="btn btn-success my-3" />
+        <input type="submit" value="Podnesi" class="btn btn-success my-3" />
       </div>
     </div>
   </div>
 </form>
- {% endblock %}
+{% endblock %}
